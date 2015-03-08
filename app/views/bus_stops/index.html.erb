@@ -1,0 +1,25 @@
+<%= link_to 'Routes >', routes_path %>
+
+<h1>Bus Stops</h1>
+
+<% @bus_stops.each do |bus_stop| %>
+  <ul>
+    <li>bus_stop id: <%= bus_stop.id %></li>
+    <li>on_street: <%= bus_stop.on_street %></li>
+    <li>cross_street: <%= bus_stop.cross_street %></li>
+    <li>boardings: <%= bus_stop.boardings %></li>
+    <li>alightings: <%= bus_stop.alightings %></li>
+    <li>month_beginning: <%= bus_stop.month_beginning %></li>
+    <li>daytype: <%= bus_stop.day_type %></li>
+    <li>latitude: <%= bus_stop.latitude %></li>
+    <li>longitude: <%= bus_stop.longitude %></li>
+    <li>routes: <%= bus_stop.routes.count %></li>
+
+    <% bus_stop.routes.each do |route| %>
+      <ul>
+        <li><%= route.number %></li>
+      </ul>
+    <% end %>
+  </ul>
+  <p></p>
+<% end %>

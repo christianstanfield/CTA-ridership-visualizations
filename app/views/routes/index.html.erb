@@ -1,0 +1,18 @@
+<%= link_to '< Bus Stops', bus_stops_path %>
+
+<h1>Routes</h1>
+
+<% @routes.each do |route| %>
+  <ul>
+    <li>route id: <%= route.id %></li>
+    <li>number: <%= route.number %></li>
+    <li>bus stops: <%= route.bus_stops.count %></li>
+
+    <% route.bus_stops.each do |bus_stop| %>
+      <ul>
+        <li># of boardings: <%= bus_stop.boardings %></li>
+      </ul>
+    <% end %>
+  </ul>
+  <p></p>
+<% end %>
