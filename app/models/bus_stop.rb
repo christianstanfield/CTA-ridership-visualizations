@@ -11,4 +11,6 @@ class BusStop < ActiveRecord::Base
   validates :latitude, presence: true, numericality: true
   validates :longitude, presence: true, numericality: true
 
+  scope :order_by_routes, ->{ joins(:bus_stop_routes).group('bus_stops.id').order('count(bus_stop_routes.bus_stop_id) desc') }
+
 end
