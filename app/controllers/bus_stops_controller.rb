@@ -6,6 +6,6 @@ class BusStopsController < ApplicationController
   end
 
   def map
-    gon.bus_stops = BusStop.all
+    gon.bus_stops = BusStop.limit(100)
   end
 end
