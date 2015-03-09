@@ -2,6 +2,8 @@
 
 <h1>Bus Stops</h1>
 
+<%= link_to 'See Map', bus_stops_map_path %>
+
 <% @bus_stops.each do |bus_stop| %>
   <ul>
     <li>bus_stop id: <%= bus_stop.id %></li>
