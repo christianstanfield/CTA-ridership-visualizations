@@ -6,7 +6,7 @@
   <ul>
     <li>route id: <%= route.id %></li>
     <li>number: <%= route.number %></li>
-    <li>bus stops: <%= route.bus_stops.count %></li>
+    <li>bus stops: <%= route.bus_stops.count %> <%= link_to 'See Map', route_path(route) %></li>
 
     <% route.bus_stops.each do |bus_stop| %>
       <ul>

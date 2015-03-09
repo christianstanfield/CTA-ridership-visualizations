@@ -2,8 +2,8 @@ Rails.application.routes.draw do
 
   resources :bus_stops, only: [:index]
     get 'bus_stops/map' => 'bus_stops#map'
-  
-  resources :routes, only: [:index]
+
+  resources :routes, only: [:index, :show]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
