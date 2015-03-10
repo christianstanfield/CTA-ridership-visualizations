@@ -6,13 +6,14 @@
   fill: steelblue; /* svg for color */
 }
 
-.chart text {
-  /* fill: white; */
+.bar text {
   font: 10px sans-serif;
-  text-anchor: middle; /* centers text on position */
+  text-anchor: end;
+  
 }
 
 .axis text {
+  font: 10px sans-serif;
   font: 10px sans-serif;
 }
 
@@ -20,18 +21,17 @@
 .axis line {
   fill: none;
   stroke: #000;
-  /* shape-rendering: crispEdges; */
 }
 
-.rotate, .x .tick text {
+/* .rotate, .x .tick text {
   transform: rotate(-90deg);
   -webkit-transform: rotate(-90deg);
   -moz-transform: rotate(-90deg);
   -ms-transform: rotate(-90deg);
   -o-transform: rotate(-90deg);
-  /* Internet Explorer */
+  Internet Explorer
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
-}
+} */
 
 .axis .axis-label {
   text-anchor: end;

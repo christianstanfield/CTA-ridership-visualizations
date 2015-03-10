@@ -5,6 +5,6 @@ class BusStopsController < ApplicationController
   end
 
   def chart
-    gon.bus_stops = BusStop.order('boardings desc')
+    gon.bus_stops = BusStop.order('boardings desc').limit(100)
   end
 end
