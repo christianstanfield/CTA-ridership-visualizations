@@ -2,10 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.chart {
-  margin-top: 25px;
-}
-
 .chart rect {
   fill: steelblue; /* svg for color */
 }
@@ -14,4 +10,29 @@
   /* fill: white; */
   font: 10px sans-serif;
   text-anchor: middle; /* centers text on position */
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  /* shape-rendering: crispEdges; */
+}
+
+.rotate, .x .tick text {
+  transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  /* Internet Explorer */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+.axis .axis-label {
+  text-anchor: end;
 }
