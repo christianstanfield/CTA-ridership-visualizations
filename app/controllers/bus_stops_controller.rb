@@ -5,6 +5,6 @@ class BusStopsController < ApplicationController
   end
 
   def chart
-    gon.bus_stops = BusStop.limit(6)
+    gon.bus_stops = BusStop.limit(10)
   end
 end

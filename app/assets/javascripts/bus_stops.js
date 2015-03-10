@@ -1,31 +1,35 @@
 function loadBusStopsChart () {
-  console.log(gon.bus_stops);
   var data = gon.bus_stops;
 
-  var width = 750,
-      barHeight = 20;
+  // Chart size
+  var width = 960,
+      height = 500,
+      barWidth = width / data.length; // Scale on data size
 
-  var x = d3.scale.linear()
-      .domain([0, d3.max(data, function(d) { return d.boardings; })])
-      .range([0, width]);
+  // Scale y axis on data size (map domain values to range values)
+  var y = d3.scale.linear()
+      .domain([0, d3.max(data, function(d) { return d.boardings + 10; })]) // add a little spacing at the top for numbers above bars
+      .range([height, 0]); // reversed for SVG
 
-  var chart = d3.select(".chart")
-      .attr("width", width)
-      .attr("height", barHeight * data.length);
+  // Create chart (nice and easy)
+  var chart = d3.select('.chart')
+      .attr('width', width)
+      .attr('height', height);
 
-  var bar = chart.selectAll("g")
+  // Append svg g tags for each element in data, spread out by barWidth on x, y = 0
+  var bar = chart.selectAll('g')
       .data(data)
-    .enter().append("g")
-      .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
+      .enter().append('g')
+      .attr('transform', function(d, i) { return 'translate(' + i * barWidth + ', 0)'; });
 
-  bar.append("rect")
-      .attr("width", function(d) { return x(d.boardings); })
-      .attr("height", barHeight - 1);
+  bar.append('rect') // SVG positions from upper left (not so easy)
+      .attr('y', function(d) { return y(d.boardings); }) // Set y pos based on data size
+      .attr('height', function(d) { return height - y(d.boardings); }) // chart height minus data height
+      .attr('width', barWidth - 1); // Subtract 1 pixel for padding
 
-  bar.append("text")
-      .attr("x", function(d) { return x(d.boardings) - 3; })
-      .attr("y", barHeight / 2)
-      .attr("dy", ".35em")
+  bar.append('text')
+      .attr('y', function(d) { return y(d.boardings) - 10; })
+      .attr('x', barWidth / 2)
       .text(function(d) { return d.boardings; });
 }
 
