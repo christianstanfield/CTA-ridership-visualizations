@@ -11,24 +11,40 @@ function loadRouteMap() {
   var circles = [];
 
   for (var i = 0; i < gon.bus_stops.length; i++) {
-    var bus_stop = gon.bus_stops[i];
+    var busStop = gon.bus_stops[i];
 
     var circleOptions = {
-      // strokeColor: '#FF0000',
-      // strokeOpacity: 0.8,
       strokeWeight: 0,
-      fillColor: '#FF0000',
+      fillColor: 'blue',
       fillOpacity: 0.35,
       map: map,
-      center: new google.maps.LatLng(bus_stop.latitude, bus_stop.longitude),
-      radius: bus_stop.boardings
+      center: new google.maps.LatLng(busStop.latitude, busStop.longitude),
+      radius: busStop.boardings
     };
 
-    circles.push(new google.maps.Circle(circleOptions));
+    var circle = new google.maps.Circle(circleOptions);
+
+    // InfoWindows
+    (function(circle, busStop) {
+      google.maps.event.addListener(circle, 'click', function () {
+
+        var contentString = '<p>' + busStop.on_street + ' and ' + busStop.cross_street + '</p>' +
+                            '<p>Boardings: ' + busStop.boardings + '</p>';
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString,
+          position: circle.center
+        });
+
+        infowindow.open(map);
+      });
+    })(circle, busStop);
+
+    circles.push(circle);
   }
 
   // update circles' radius on zoom
-  google.maps.event.addListener(map, 'zoom_changed', function() {
+  google.maps.event.addListener(map, 'zoom_changed', function () {
     var newRadius;
 
     if (map.zoom > mapZoom) {
