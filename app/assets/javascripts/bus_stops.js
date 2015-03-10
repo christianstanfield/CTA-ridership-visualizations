@@ -1,28 +1,32 @@
-function loadBusStopsMap() {
+function loadBusStopsChart () {
+  console.log(gon.bus_stops);
+  var data = gon.bus_stops;
 
-  // Map
-  var map = new google.maps.Map(document.getElementById('map-canvas'),
-    { zoom: 11,
-      center: new google.maps.LatLng(41.881832, -87.623177)
-    });
+  var width = 750,
+      barHeight = 20;
 
-  // Circles
-  for (var i = 0; i < gon.bus_stops.length; i++) {
-    var bus_stop = gon.bus_stops[i];
+  var x = d3.scale.linear()
+      .domain([0, d3.max(data, function(d) { return d.boardings; })])
+      .range([0, width]);
 
-    var circleOptions = {
-      strokeColor: '#FF0000',
-      strokeOpacity: 0.8,
-      strokeWeight: 2,
-      fillColor: '#FF0000',
-      fillOpacity: 0.35,
-      map: map,
-      center: new google.maps.LatLng(bus_stop.latitude, bus_stop.longitude),
-      radius: bus_stop.boardings
-    };
+  var chart = d3.select(".chart")
+      .attr("width", width)
+      .attr("height", barHeight * data.length);
 
-    var cityCircle = new google.maps.Circle(circleOptions);
-  }
+  var bar = chart.selectAll("g")
+      .data(data)
+    .enter().append("g")
+      .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
+
+  bar.append("rect")
+      .attr("width", function(d) { return x(d.boardings); })
+      .attr("height", barHeight - 1);
+
+  bar.append("text")
+      .attr("x", function(d) { return x(d.boardings) - 3; })
+      .attr("y", barHeight / 2)
+      .attr("dy", ".35em")
+      .text(function(d) { return d.boardings; });
 }
 
-if (window.location.pathname === '/bus_stops/map') google.maps.event.addDomListener(window, 'load', loadBusStopsMap);
+if (window.location.pathname === '/bus_stops/chart') window.addEventListener('load', loadBusStopsChart);
