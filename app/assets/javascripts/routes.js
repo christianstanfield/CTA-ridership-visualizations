@@ -5,7 +5,7 @@ function loadRouteMap() {
     { zoom: 11,
       center: new google.maps.LatLng(41.881832, -87.623177)
     });
-  var mapZoom = 11; // for adjusting circle radius on zoom
+  var mapZoom = map.zoom; // for adjusting circle radius on zoom
 
   // Circles
   var circles = [];

@@ -44,3 +44,4 @@ group :test, :development do
 end
 
 gem 'gon'
+gem 'd3_rails'
