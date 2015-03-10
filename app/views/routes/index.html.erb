@@ -5,12 +5,12 @@
 <% @routes.each do |route| %>
   <ul>
     <li>route id: <%= route.id %></li>
-    <li>number: <%= route.number %></li>
+    <li>route number: <%= route.number %></li>
     <li>bus stops: <%= route.bus_stops.count %> <%= link_to 'See Map', route_path(route) %></li>
 
     <% route.bus_stops.each do |bus_stop| %>
       <ul>
-        <li># of boardings: <%= bus_stop.boardings %></li>
+        <li><%= bus_stop.on_street %> and <%= bus_stop.cross_street %> boardings: <%= bus_stop.boardings %></li>
       </ul>
     <% end %>
   </ul>
