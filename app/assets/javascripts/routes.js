@@ -19,7 +19,7 @@ function loadRouteMap() {
       fillOpacity: 0.35,
       map: map,
       center: new google.maps.LatLng(busStop.latitude, busStop.longitude),
-      radius: busStop.boardings
+      radius: busStop.boardings*2
     };
 
     var circle = new google.maps.Circle(circleOptions);
